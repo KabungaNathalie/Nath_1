@@ -1,0 +1,60 @@
+{% extends "AsideEss.html" %}
+
+{% block content %}
+
+<form action="/ajouter" method="POST"> 
+ <!-- crée un formulaire HTML qui envoie les données saisies par l'utilisateur à l'URL "/ajouter" en utilisant la méthode POST. Cela signifie que lorsque l'utilisateur soumet le formulaire, les données seront envoyées au serveur pour être traitées à cette URL spécifique. -->
+
+
+    <input type="text" name="nom" placeholder="Nom"> 
+    <!-- crée un champ de saisie de texte pour le nom de l'étudiant. L'attribut "name" est défini sur "nom", ce qui signifie que lorsque le formulaire est soumis, la valeur saisie dans ce champ sera envoyée au serveur avec la clé "nom". L'attribut "placeholder" affiche un texte d'exemple ("Nom") à l'intérieur du champ pour indiquer à l'utilisateur ce qu'il doit saisir. -->
+    <input type="text" name="postnom" placeholder="Post-nom">
+    <input type="text" name="prenom" placeholder="Prénom">
+    <!-- crée un champ de saisie de texte pour le prénom de l'étudiant. L'attribut "name" est défini sur "prenom", ce qui signifie que lorsque le formulaire est soumis, la valeur saisie dans ce champ sera envoyée au serveur avec la clé "prenom". L'attribut "placeholder" affiche un texte d'exemple ("Prénom") à l'intérieur du champ pour indiquer à l'utilisateur ce qu'il doit saisir. --> 
+    <input type="text" name="matricule" placeholder="Matricule"> 
+    <!-- crée un champ de saisie de texte pour le matricule de l'étudiant. L'attribut "name" est défini sur "matricule", ce qui signifie que lorsque le formulaire est soumis, la valeur saisie dans ce champ sera envoyée au serveur avec la clé "matricule". L'attribut "placeholder" affiche un texte d'exemple ("Matricule") à l'intérieur du champ pour indiquer à l'utilisateur ce qu'il doit saisir. -->
+    <input type="text" name="uid_rfid" placeholder="UID RFID">
+    <div class="form-row">
+        <label for="promotion">Promotion:</label>
+        <select id="promotion" name="promotion" required onchange="gererFiliere()">
+          <option value="">-- Choisissez une promotion --</option>
+          <option value="L0">L0</option>
+          <option value="L1">L1</option>
+          <option value="L2">L2</option>
+          <option value="L3">L3</option>
+          <option value="M1">M1</option>
+          <option value="M2">M2</option>
+        </select>
+      </div>
+    
+      <div class="form-row">
+        <label for="filiere">Filière:</label>
+        <select name="filiere" id="filiere" required disabled>
+          <option value="">-- Choisissez une filière --</option>
+          <option value="civil">Génie Civil</option>
+          <option value="electrique">Génie Electrique</option>
+          <option value="informatique">Génie Informatique</option>
+          <option value="mecanique">Génie Mecanique</option>
+        </select>
+      </div>
+      <script>
+        function gererFiliere(){
+            let promo = document.getElementById("promotion").value;
+            let filiere = document.getElementById("filiere");
+            if (promo === "L2" || promo === "L3"|| promo === "M1" || promo === "M2"){
+                filiere.disabled=false;
+            }else{
+                filiere.disabled=true;
+                filiere.value="";
+            }
+             }
+         window.onload = gererFiliere;
+      </script>
+    <button type="submit">Enregistrer</button>
+    <br>
+    <br>
+<a href="/liste">Voir la liste des étudiants</a>
+<!-- <a href="FormulaireCours.html">Voir le formulaire des cours</a> -->
+
+</form>
+{% endblock %}
